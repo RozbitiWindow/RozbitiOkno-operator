@@ -1,7 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 //await Task.Delay(10000); cekat 10 sec
-string ver = "1.0.1"; //everything was made by RozbitiOkno 24.11. 2025
+string ver = "1.0.2"; //everything was made by RozbitiOkno 24.11. 2025
 Console.ForegroundColor = ConsoleColor.Red;
 Console.WriteLine("=== " + (DateTime.Now) + " ===");
 Console.WriteLine("RozitiOkno operators v." + ver);
