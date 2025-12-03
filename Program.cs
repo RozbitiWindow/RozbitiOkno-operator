@@ -1,200 +1,199 @@
 using System;
-Console.Clear();
+using System.Collections.Generic;
+using System.Threading;
 
-string ver = "1.0.4"; // everything was made by RozbitiOkno 24.11.2025
-// HEADER
-Console.ForegroundColor = ConsoleColor.Red;
-Console.WriteLine("=== " + DateTime.Now + " ===");
-Console.WriteLine("RozitiOkno operators v." + ver);
-Console.WriteLine("=============================");
-Console.ResetColor();
-
-// MAIN MENU
-Console.ForegroundColor = ConsoleColor.Green;
-Console.WriteLine("To perform calculations press 1, to generate random numbers press 2, to convert units press 3");
-Console.ResetColor();
-Console.ForegroundColor = ConsoleColor.DarkRed;
-Console.Write("Your choice: ");
-Console.ResetColor();
-
-if (!int.TryParse(Console.ReadLine(), out int whattodo))
+class Program
 {
-    Console.ForegroundColor = ConsoleColor.Red;
-    Console.WriteLine("ERROR: Not a number! - " + whattodo + " - try something else!");
-    Console.ResetColor();
-    return;
-}
+    static void Main()
+    {
+        Console.Clear();
+        string ver = "1.0.4"; // everything was made by RozbitiOkno 24.11.2025 
 
-switch (whattodo)
-{
-    // ----------------------------------------- //
-    // CALCULATOR
-    // ----------------------------------------- //
-    case 1:
+        // HEADER
         Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine("=== " + DateTime.Now + " ===");
-        Console.WriteLine("RozitiOkno calculator v." + ver);
+        Console.WriteLine("RozitiOkno operators v." + ver);
         Console.WriteLine("=============================");
         Console.ResetColor();
 
+        // MAIN MENU
         Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine("Do you need multiple operations? (y/n)");
+        Console.WriteLine("1 → Calculations");
+        Console.WriteLine("2 → Random numbers");
+        Console.WriteLine("3 → Unit converter");
+        Console.WriteLine("4 → Play minigames");
+        Console.WriteLine("0 → exit");
         Console.ResetColor();
         Console.ForegroundColor = ConsoleColor.DarkRed;
         Console.Write("Your choice: ");
         Console.ResetColor();
-        string multiple = Console.ReadLine().ToLower();
+        double whattodo = double.Parse(Console.ReadLine());
 
-        switch (multiple)
+        if (whattodo != 0 && whattodo != 1 && whattodo != 2 && whattodo != 3 && whattodo != 4 )
         {
-            // MULTIPLE OPERATIONS
-            case "y":
-            case "yes":
+            Console.WriteLine("ERROR: Not a number or invalid number!");
+        }
+
+        if (whattodo == 0)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Exiting . . .");
+            Console.ResetColor();
+            return;
+        }
+
+        // ------------------------- CALCULATOR ------------------------- //
+        if (whattodo == 1)
+        {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("=== Calculator v." + ver + " ===");
+            Console.ResetColor();
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Do you need multiple operations? (y/n)");
+            Console.ResetColor();
+
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.Write("Your choice: ");
+            Console.ResetColor();
+
+            string multiple = Console.ReadLine().ToLower();
+
+            if (multiple == "y" || multiple == "yes")
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Enter your first number:");
+                Console.ResetColor();
+
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.Write("Your choice: ");
+                Console.ResetColor();
+
+                double result = double.Parse(Console.ReadLine());
+                string continueCalc = "y";
+
+                while (continueCalc == "y")
                 {
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("Enter your first number:");
-                    Console.ResetColor();
-                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.Write("Your choice ");
-                    Console.ResetColor();
-                    double result = double.Parse(Console.ReadLine());
-
-                    string continueCalc = "y";
-
-                    while (continueCalc == "y")
-                    {
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine("Enter operation (+,-,*,/):");
-                        Console.ResetColor();
-                        Console.ForegroundColor = ConsoleColor.DarkRed;
-                        Console.Write("Your choice ");
-                        Console.ResetColor();
-                        string oper = Console.ReadLine();
-
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine("Enter next number:");
-                        Console.ResetColor();
-                        Console.ForegroundColor = ConsoleColor.DarkRed;
-                        Console.Write("Your choice ");
-                        Console.ResetColor();
-                        double next = double.Parse(Console.ReadLine());
-
-                        switch (oper)
-                        {
-                            case "+": result += next; break;
-                            case "-": result -= next; break;
-                            case "*": result *= next; break;
-                            case "/": result /= next; break;
-                            default:
-                                Console.ForegroundColor = ConsoleColor.Red;
-                                Console.WriteLine("Invalid operation!");
-                                Console.ResetColor();
-                                continue;
-                        }
-
-                        Console.ForegroundColor = ConsoleColor.DarkRed;
-                        Console.WriteLine("Current result: " + result);
-                        Console.ResetColor();
-
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine("Do you want to continue? (y/n)");
-                        Console.ResetColor();
-                        Console.ForegroundColor = ConsoleColor.DarkRed;
-                        Console.Write("Your choice ");
-                        Console.ResetColor();
-                        continueCalc = Console.ReadLine().ToLower();
-                    }
-
-                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine("Final result: " + result);
-                    Console.ResetColor();
-                    Console.WriteLine("Thanks for using multiple-operations calculator!");
-                    break;
-                }
-
-            // SINGLE OPERATION
-            case "n":
-            case "no":
-                {
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("Enter first number:");
-                    Console.ResetColor();
-                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.Write("Your choice ");
-                    Console.ResetColor();
-                    double num1 = double.Parse(Console.ReadLine());
-
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("Enter operation (+,-,*,/):");
                     Console.ResetColor();
+
                     Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.Write("Your choice ");
+                    Console.Write("Your choice: ");
                     Console.ResetColor();
                     string oper = Console.ReadLine();
 
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("Enter second number:");
+                    Console.WriteLine("Enter next number:");
                     Console.ResetColor();
-                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.Write("Your choice ");
-                    Console.ResetColor();
-                    double num2 = double.Parse(Console.ReadLine());
 
                     Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine("Result:");
+                    Console.Write("Your choice: ");
                     Console.ResetColor();
+                    double next = double.Parse(Console.ReadLine());
 
                     switch (oper)
                     {
-                        case "+": Console.WriteLine(num1 + num2); break;
-                        case "-": Console.WriteLine(num1 - num2); break;
-                        case "*": Console.WriteLine(num1 * num2); break;
-                        case "/": Console.WriteLine(num1 / num2); break;
+                        case "+": result += next; break;
+                        case "-": result -= next; break;
+                        case "*": result *= next; break;
+                        case "/": result /= next; break;
                         default:
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("Invalid operation!");
                             Console.ResetColor();
-                            break;
+                            continue;
                     }
 
-                    Console.WriteLine("Thanks for using RozbitiOkno calculator " + ver);
-                    break;
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("Current result: " + result);
+                    Console.ResetColor();
+
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Do you want to continue? (y/n)");
+                    Console.ResetColor();
+
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.Write("Your choice: ");
+                    Console.ResetColor();
+                    continueCalc = Console.ReadLine().ToLower();
                 }
 
-            default:
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("ERROR: Unknown operation " + multiple);
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("Final result: " + result);
                 Console.ResetColor();
-                break;
+                Console.WriteLine("Thanks for using multiple-operations calculator!");
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Enter first number:");
+                Console.ResetColor();
+
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.Write("Your choice: ");
+                Console.ResetColor();
+                double num1 = double.Parse(Console.ReadLine());
+
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Enter operation (+,-,*,/):");
+                Console.ResetColor();
+
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.Write("Your choice: ");
+                Console.ResetColor();
+                string oper = Console.ReadLine();
+
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Enter second number:");
+                Console.ResetColor();
+
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.Write("Your choice: ");
+                Console.ResetColor();
+                double num2 = double.Parse(Console.ReadLine());
+
+                double result = oper switch
+                {
+                    "+" => num1 + num2,
+                    "-" => num1 - num2,
+                    "*" => num1 * num2,
+                    "/" => num1 / num2,
+                    _ => double.NaN
+                };
+
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("Result: " + result);
+                Console.ResetColor();
+                Console.WriteLine("Thanks for using RozbitiOkno calculator " + ver);
+            }
         }
-        break;
 
-    // ----------------------------------------- //
-    // RANDOM NUMBER GENERATOR
-    // ----------------------------------------- //
-    case 2:
-        Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine("=== Random Number Generator ===");
-        Console.ResetColor();
-
-        Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine("Do you want to generate only YES or NO answers? (y/n)");
-        Console.ResetColor();
-        Console.ForegroundColor = ConsoleColor.DarkRed;
-        Console.Write("Your choice ");
-        Console.ResetColor();
-        string rngMode = Console.ReadLine().ToLower();
-        Random rng = new Random();
-
-        switch (rngMode)
+        // ------------------------- RANDOM NUMBERS ------------------------- //
+        else if (whattodo == 2)
         {
-            // YES / NO MODE
-            case "y":
-            case "yes":
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("=== Random Number Generator ===");
+            Console.ResetColor();
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Do you want YES/NO answers only? (y/n)");
+            Console.ResetColor();
+
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.Write("Your choice: ");
+            Console.ResetColor();
+            string rngMode = Console.ReadLine().ToLower();
+
+            Random rng = new Random();
+
+            if (rngMode == "y" || rngMode == "yes")
+            {
                 while (true)
                 {
                     string answer = rng.Next(2) == 0 ? "YES" : "NO";
-
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.WriteLine("Generated: " + answer);
                     Console.ResetColor();
@@ -202,23 +201,17 @@ switch (whattodo)
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("Generate again? (y/n)");
                     Console.ResetColor();
-                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.Write("Your choice ");
-                    Console.ResetColor();
-                    if (Console.ReadLine().ToLower() != "y")
-                        break;
-                }
-                Console.WriteLine("Thanks for using YES/NO RNG " + ver);
-                break;
 
-            // NUMBER MODE
-            case "n":
-            case "no":
+                    if (Console.ReadLine().ToLower() != "y") break;
+                }
+            }
+            else
+            {
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Enter FROM number:");
                 Console.ResetColor();
                 Console.ForegroundColor = ConsoleColor.DarkRed;
-                Console.Write("Your choice ");
+                Console.Write("Your choice: ");
                 Console.ResetColor();
                 int from = int.Parse(Console.ReadLine());
 
@@ -226,14 +219,21 @@ switch (whattodo)
                 Console.WriteLine("Enter TO number:");
                 Console.ResetColor();
                 Console.ForegroundColor = ConsoleColor.DarkRed;
-                Console.Write("Your choice ");
+                Console.Write("Your choice: ");
                 Console.ResetColor();
                 int to = int.Parse(Console.ReadLine());
+
+                if (from > to)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("FROM must be smaller than TO!");
+                    Console.ResetColor();
+                    return;
+                }
 
                 while (true)
                 {
                     int rndNum = rng.Next(from, to + 1);
-
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.WriteLine("Generated number: " + rndNum);
                     Console.ResetColor();
@@ -242,156 +242,200 @@ switch (whattodo)
                     Console.WriteLine("Generate again? (y/n)");
                     Console.ResetColor();
 
-                    if (Console.ReadLine().ToLower() != "y")
+                    if (Console.ReadLine().ToLower() != "y") break;
+                }
+            }
+
+            Console.WriteLine("Thanks for using RNG " + ver);
+        }
+
+        // ------------------------- UNIT CONVERTER ------------------------- //
+        else if (whattodo == 3)
+        {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("=== Unit Converter v." + ver + " ===");
+            Console.ResetColor();
+
+            Console.WriteLine("1 → KM to M | 2 → M to CM | 3 → CM to MM");
+            Console.WriteLine("4 → M to KM | 5 → CM to M | 6 → MM to CM");
+            Console.WriteLine("7 → T to KG | 8 → KG to G | 9 → G to mG");
+            Console.WriteLine("10 → KG to T | 11 → G to KG | 12 → mG to G");
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.Write("Your choice: ");
+            Console.ResetColor();
+            int unitChoice = int.Parse(Console.ReadLine());
+
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine("How much units do you want to convert?");
+            Console.ResetColor();
+            double HOWMUCH = double.Parse(Console.ReadLine());
+
+            double RESULT = unitChoice switch
+            {
+                1 => HOWMUCH * 1000,
+                2 => HOWMUCH * 100,
+                3 => HOWMUCH * 10,
+                4 => HOWMUCH / 1000,
+                5 => HOWMUCH / 100,
+                6 => HOWMUCH / 10,
+                7 => HOWMUCH * 1000,
+                8 => HOWMUCH * 1000,
+                9 => HOWMUCH * 1000,
+                10 => HOWMUCH / 1000,
+                11 => HOWMUCH / 1000,
+                12 => HOWMUCH / 1000,
+                _ => double.NaN
+            };
+
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine("Result: " + RESULT);
+            Console.ResetColor();
+        }
+
+        // ------------------------- MINIGAMES ------------------------- //
+        else if (whattodo == 4)
+        {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("==== Minigames v." + ver + " ====");
+            Console.ResetColor();
+
+            Console.WriteLine("1 → Guess the number");
+            Console.WriteLine("2 → Snake the game");
+
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.Write("Your choice: ");
+            Console.ResetColor();
+            int whatminigame = int.Parse(Console.ReadLine());
+
+            // ---------- GUESS THE NUMBER ---------- //
+            if (whatminigame == 1)
+            {
+                Console.Clear();
+                Console.WriteLine("Guess the number between 1-100!");
+                Random random = new Random();
+                int number = random.Next(1, 101);
+
+                while (true)
+                {
+                    if (!int.TryParse(Console.ReadLine(), out int guess))
+                    {
+                        Console.WriteLine("Not a number!");
+                        continue;
+                    }
+
+                    if (guess == number)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("Correct!");
+                        Console.ResetColor();
                         break;
+                    }
+                    else if (guess > number)
+                        Console.WriteLine("Lower!");
+                    else
+                        Console.WriteLine("Higher!");
                 }
 
-                Console.WriteLine("Thanks for using RNG " + ver);
-                break;
+                Console.WriteLine("Thanks for playing!");
+            }
 
-            default:
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("ERROR: Unknown mode \"" + rngMode + "\"");
-                Console.ResetColor();
-                break;
-        }
-        break;
+            // ---------- SNAKE ---------- //
+            else if (whatminigame == 2)
+            {
+                int width = 30;
+                int height = 15;
+                int score = 0;
+                Console.CursorVisible = false;
 
-    // ----------------------------------------- //
-    // UNFINISHED UNIT CONVERTER
-    // ----------------------------------------- //
-    case 3:
-        Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine("====== " + DateTime.Now + " ======");
-        Console.WriteLine("RozitiOkno Unit Convertor v." + ver);
-        Console.WriteLine("===================================");
-        Console.ResetColor();
-        Console.WriteLine("Select your unit");
-        Console.WriteLine("1 → KM to M");
-        Console.WriteLine("2 → M to CM");
-        Console.WriteLine("3 → CM to MM");
-        Console.WriteLine("------------");
-        Console.WriteLine("4 → M to KM"); //opak
-        Console.WriteLine("5 → CM to M");
-        Console.WriteLine("6 → MM to CM");
-        Console.WriteLine("============");
-        Console.WriteLine("7 → T to KG");
-        Console.WriteLine("8 → KG to G");
-        Console.WriteLine("9 → G to mG");
-        Console.WriteLine("-----------"); //opak
-        Console.WriteLine("10 → KG to T");
-        Console.WriteLine("11 → G to KG");
-        Console.WriteLine("12 → mG to G");
-        Console.ForegroundColor = ConsoleColor.DarkRed;
-        Console.Write("Your choice: ");
-        Console.ResetColor();
-        double yourUnit = double.Parse(Console.ReadLine());
-        Console.ForegroundColor = ConsoleColor.DarkRed;    
-        Console.WriteLine("How much units do you want to convert?");
-        Console.ResetColor();
-        double HOWMUCH = double.Parse(Console.ReadLine());
-        double RESULTUNITS = yourUnit switch
-        {
-            1 => HOWMUCH * 1000, //KM
-            2 => HOWMUCH * 100,
-            3 => HOWMUCH * 10,
-            4 => HOWMUCH / 1000, //opak
-            5 => HOWMUCH / 1000,
-            6 => HOWMUCH / 1000,
-            7 => HOWMUCH * 1000, //KG
-            8 => HOWMUCH * 1000,
-            9 => HOWMUCH * 1000,
-            10 => HOWMUCH / 1000, //opak
-            11 => HOWMUCH / 1000,
-            12 => HOWMUCH / 1000,
-            _ => double.NaN,
-        };
+                List<(int x, int y)> snake = new List<(int x, int y)> { (width / 2, height / 2) };
+                Random rng = new Random();
+                (int x, int y) food = (rng.Next(width), rng.Next(height));
+                ConsoleKey direction = ConsoleKey.RightArrow;
 
-        if (yourUnit != 1 && yourUnit != 3 && yourUnit != 2 && yourUnit != 4 && yourUnit != 5 && yourUnit != 6 && yourUnit != 7 && yourUnit != 8 && yourUnit != 9 && yourUnit != 10 && yourUnit != 11 && yourUnit != 12) 
-        {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("NOT VALID OPTION! - " + yourUnit + " - try something else!");
-            Console.ResetColor();
+                while (true)
+                {
+                    if (Console.KeyAvailable)
+                    {
+                        var key = Console.ReadKey(true).Key;
+                        switch (key)
+                        {
+                            case ConsoleKey.UpArrow:
+                                if (direction != ConsoleKey.DownArrow) direction = ConsoleKey.UpArrow; break;
+                            case ConsoleKey.DownArrow:
+                                if (direction != ConsoleKey.UpArrow) direction = ConsoleKey.DownArrow; break;
+                            case ConsoleKey.LeftArrow:
+                                if (direction != ConsoleKey.RightArrow) direction = ConsoleKey.LeftArrow; break;
+                            case ConsoleKey.RightArrow:
+                                if (direction != ConsoleKey.LeftArrow) direction = ConsoleKey.RightArrow; break;
+                        }
+                    }
+
+                    var head = snake[0];
+                    (int x, int y) newHead = head;
+                    switch (direction)
+                    {
+                        case ConsoleKey.UpArrow: newHead.y--; break;
+                        case ConsoleKey.DownArrow: newHead.y++; break;
+                        case ConsoleKey.LeftArrow: newHead.x--; break;
+                        case ConsoleKey.RightArrow: newHead.x++; break;
+                    }
+
+                    if (newHead.x < 0 || newHead.x >= width || newHead.y < 0 || newHead.y >= height || snake.Contains(newHead))
+                    {
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("GAME OVER!");
+                        Console.WriteLine("Score: " + score);
+                        Console.ResetColor();
+                        break;
+                    }
+
+                    snake.Insert(0, newHead);
+
+                    if (newHead == food)
+                    {
+                        score++;
+                        do { food = (rng.Next(width), rng.Next(height)); }
+                        while (snake.Contains(food));
+                    }
+                    else snake.RemoveAt(snake.Count - 1);
+
+                    Console.SetCursorPosition(0, 0);
+                    for (int y = 0; y < height; y++)
+                    {
+                        for (int x = 0; x < width; x++)
+                        {
+                            if (snake.Contains((x, y))) { Console.ForegroundColor = ConsoleColor.Green; Console.Write("O"); }
+                            else if (food == (x, y)) { Console.ForegroundColor = ConsoleColor.Red; Console.Write("X"); }
+                            else Console.Write(" ");
+                            Console.ResetColor();
+                        }
+                        Console.WriteLine();
+                    }
+                    Console.WriteLine("Score: " + score);
+                    Thread.Sleep(200);
+                }
+                Console.WriteLine("Press ENTER to exit Snake...");
+                Console.ReadLine();
+            }
         }
 
         else
         {
-                Console.ForegroundColor = ConsoleColor.DarkRed;
-                if (yourUnit == 1) //normal
-        {
-            Console.WriteLine("Result: " + RESULTUNITS + " M");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Invalid option!");
+            Console.ResetColor();
         }
-                if (yourUnit == 2)
-        {
-            Console.WriteLine("Result: " + RESULTUNITS + " CM");
-        }
-                if (yourUnit == 3)
-        {
-            Console.WriteLine("Result: " + RESULTUNITS + " MM");
-        }   
-                if (yourUnit == 4) //opak
-        {
-                Console.WriteLine("Result: " + RESULTUNITS + " KM"); 
-        }
-                if (yourUnit == 5)
-        {
-            Console.WriteLine("Result: " + RESULTUNITS + " M");
-        }   
-                if (yourUnit == 6)
-        {
-                Console.WriteLine("Result: " + RESULTUNITS + " CM");
-        }
-                if (yourUnit == 7) //normal
-        {
-                Console.WriteLine("Result: " + RESULTUNITS + " KG");
-        }
-                if (yourUnit == 8)
-        {
-            Console.WriteLine("Result: " + RESULTUNITS + " G");
-        }   
-                if (yourUnit == 9)
-        {
-                Console.WriteLine("Result: " + RESULTUNITS + " mG");
-        }
-                if (yourUnit == 10)
-        {
-                Console.WriteLine("Result: " + RESULTUNITS + " T");
-        }
-                if (yourUnit == 11)
-        {
-                Console.WriteLine("Result: " + RESULTUNITS + " KG");
-        }
-                if (yourUnit == 12)
-        {
-                Console.WriteLine("Result: " + RESULTUNITS + " G");
-        }
-        }
-        
-        Console.ResetColor();
-        break;
 
-    // SECRET OPTION - sreggin - ODEBRAT after vydání/nikdy
-    case 67:
-        Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine("SIXXXX SEVENNNN!");
-        Console.WriteLine("Stupid peoples are NOT allowed to use this program!");
-        Console.WriteLine("STFU you little nigga . . .");
+        Console.WriteLine("See more on github.com/rozbitiwindow");
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.Write("Press ENTER to exit...");
+        Console.ReadLine();
         Console.ResetColor();
-        break;
-
-    default:
-        Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine("ERROR: Not an option! Try 1,2,3");
+        Console.WriteLine("Thanks for using RozbitiOkno operators!");
         Console.ResetColor();
-        break;
+    }
 }
-
-
-Console.ResetColor();
-Console.WriteLine("See more on github.com/rozbitiwindow");
-Console.ForegroundColor = ConsoleColor.Green;
-Console.Write("Press ENTER to exit...");
-Console.ReadLine();
-Console.ResetColor();
-Console.WriteLine("Thx for using RozbitiOkno operators!");
-Console.ResetColor();
+//everything was made by RozbitiOkno - last edit 9:23 PM - 12/3/25
