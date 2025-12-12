@@ -13,6 +13,29 @@ class Program
         string ver = "1.0.4"; // everything was made by RozbitiOkno 24.11.2025 
 
         // HEADER
+        int repete = 0;
+        double percentage = 0;
+        while (repete != 10)
+        {
+        Console.Clear();
+        percentage += 7.49546;
+        Console.WriteLine("[----- " + percentage + "% -----]");
+        Thread.Sleep(400);
+        
+        if (Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Enter)
+            {
+                break;
+            }
+        repete++;
+        
+        }
+        
+ 
+
+
+ while (true)
+    {
+        Console.Clear();
         Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine("=== " + DateTime.Now + " ===");
         Console.WriteLine("RozitiOkno operators v." + ver);
@@ -20,15 +43,16 @@ class Program
         Console.ResetColor();
 
         // MAIN MENU
-    while (true)
-    {
-        Console.Clear();
+   
+        
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine("1 → Calculations");
         Console.WriteLine("2 → Random numbers");
         Console.WriteLine("3 → Unit converter");
         Console.WriteLine("4 → Play minigames");
         Console.WriteLine("5 → See history");
+        Console.WriteLine("6 → Timer");
+        Console.WriteLine("7 → StopWatch");
         Console.WriteLine("0 → exit");
         Console.ResetColor();
         Console.ForegroundColor = ConsoleColor.DarkRed;
@@ -36,7 +60,7 @@ class Program
         Console.ResetColor();
         double whattodo = double.Parse(Console.ReadLine());
 
-        if (whattodo != 0 && whattodo != 1 && whattodo != 2 && whattodo != 3 && whattodo != 4 && whattodo != 5 && whattodo != 111)
+        if (whattodo != 0 && whattodo != 1 && whattodo != 2 && whattodo != 3 && whattodo != 4 && whattodo != 5 && whattodo != 111 && whattodo != 67 && whattodo != 420 && whattodo != 1337 && whattodo != 6 && whattodo != 7)
         {
             Console.WriteLine("ERROR: Not a number or invalid number!");
         }
@@ -68,7 +92,7 @@ class Program
                 }
         }
         //okamzity exit 
-        else if (whattodo == 111)
+        else if (whattodo == 111) //mozna upravit na lepší číslo idk
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Immediate termination and non-saving of things . . .");
@@ -349,6 +373,7 @@ class Program
             int whatminigame = int.Parse(Console.ReadLine());
 
             // ---------- GUESS THE NUMBER ---------- //
+            int attemps = 0;
             if (whatminigame == 1)
             {
                 Console.Clear();
@@ -371,13 +396,24 @@ class Program
                         Console.ResetColor();
                         break;
                     }
+                    
                     else if (guess > number)
-                        Console.WriteLine("Lower!");
+                        {
+                            Console.WriteLine("Lower!");
+                            attemps++;
+                        }
+                    
+                        
                     else
-                        Console.WriteLine("Higher!");
+                        {
+                            Console.WriteLine("Higher!");
+                            attemps++;
+                        }
+                        
                 }
+
                 
-                string zaznam = $"Guess the number - date: {DateTime.Now}";
+                string zaznam = $"Guess the number: Attemps: {attemps} - Date: {DateTime.Now}";
                 historieScore.Add(zaznam);
                 Console.WriteLine("Thanks for playing!");
             }
@@ -429,7 +465,7 @@ class Program
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("GAME OVER!");
                         Console.WriteLine("Score: " + score);
-                        string zaznam = $"Snake the game: {score} - Date: {DateTime.Now}";
+                        string zaznam = $"Snake the game: score: {score} - Date: {DateTime.Now}";
                         historieScore.Add(zaznam);
                         Console.ResetColor();
                         break;
@@ -507,6 +543,36 @@ class Program
             }
         
         }
+//----------------------SECREETS-------------------------//
+    if (whattodo == 1337)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("What a hacker here!");
+                Console.ResetColor();
+            }
+    if (whattodo == 420)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("By BrokenWindowGameDev");
+                Console.ResetColor();
+            }
+    if (whattodo == 67)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("NOT FUNNY, too late!");
+                Console.ResetColor();
+            }
+
+//----------------------TIMER a STOPWATCH-----------------//
+    if (whattodo == 6)
+            {
+                Console.WriteLine("Complete SOON!"); //timer
+            }
+
+    if (whattodo == 7)
+            {
+                Console.WriteLine("Complete SOON!"); //stopwatch
+            }
 
         else
         {
@@ -529,4 +595,6 @@ class Program
   }
 
 }
-//everything was edited By RozbitiOkno on 12/4/25 at 8/02 PM
+
+
+//made by RozbitiOkno - 600 lines
