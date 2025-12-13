@@ -1,16 +1,19 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Net;
 using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 
 class Program
 {
-    static List<string> historieScore = new List<string>();
+    static List<string> historieScore = new List<string>(); // game list
+    static List<string> calcScore = new List<string>(); // calc list
     static void Main()
     {
-        string ver = "1.0.4"; // everything was made by RozbitiOkno 24.11.2025 
+        string ver = "1.1.2 - history update"; // everything was made by RozbitiOkno 24.11.2025 
 
         // HEADER
         int repete = 0;
@@ -30,9 +33,6 @@ class Program
         
         }
         
- 
-
-
  while (true)
     {
         Console.Clear();
@@ -44,7 +44,6 @@ class Program
 
         // MAIN MENU
    
-        
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine("1 → Calculations");
         Console.WriteLine("2 → Random numbers");
@@ -53,6 +52,7 @@ class Program
         Console.WriteLine("5 → See history");
         Console.WriteLine("6 → Timer");
         Console.WriteLine("7 → StopWatch");
+        Console.WriteLine("8 → ^,√ ");
         Console.WriteLine("0 → exit");
         Console.ResetColor();
         Console.ForegroundColor = ConsoleColor.DarkRed;
@@ -76,6 +76,7 @@ class Program
                 {
                     Console.WriteLine("Exiting . . .");
                     Console.ResetColor();
+                    Console.Clear();
                     return;
                 }
             if (doyouwanttocontinue == "n" || doyouwanttocontinue == "N")
@@ -187,6 +188,8 @@ class Program
                 Console.WriteLine("Final result: " + result);
                 Console.ResetColor();
                 Console.WriteLine("Thanks for using multiple-operations calculator!");
+                string calczaznam = $"Calculator (multiple operations): {result} - Date: {DateTime.Now}";
+                calcScore.Add(calczaznam);
             }
             else
             {
@@ -200,7 +203,7 @@ class Program
                 double num1 = double.Parse(Console.ReadLine());
 
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Enter operation (+,-,*,/):");
+                Console.WriteLine("Enter operation (+,-,*,/,):");
                 Console.ResetColor();
 
                 Console.ForegroundColor = ConsoleColor.DarkRed;
@@ -230,6 +233,9 @@ class Program
                 Console.WriteLine("Result: " + result);
                 Console.ResetColor();
                 Console.WriteLine("Thanks for using RozbitiOkno calculator " + ver);
+                string calczaznam = $"Calculator (simple): {num1} {oper} {num2} = {result} - Date: {DateTime.Now}";
+                calcScore.Add(calczaznam);
+
             }
         }
 
@@ -254,9 +260,12 @@ class Program
 
             if (rngMode == "y" || rngMode == "yes")
             {
+
+                string answer = "";
+
                 while (true)
                 {
-                    string answer = rng.Next(2) == 0 ? "YES" : "NO";
+                    answer = rng.Next(2) == 0 ? "YES" : "NO"; //yes or no
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.WriteLine("Generated: " + answer);
                     Console.ResetColor();
@@ -267,6 +276,10 @@ class Program
 
                     if (Console.ReadLine().ToLower() != "y") break;
                 }
+
+                string calczaznam = $"RNG (YES and NO): genereted: {answer}   - Date: {DateTime.Now}"; //add do history YES / NO
+                calcScore.Add(calczaznam);
+
             }
             else
             {
@@ -276,7 +289,7 @@ class Program
                 Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.Write("Your choice: ");
                 Console.ResetColor();
-                int from = int.Parse(Console.ReadLine());
+                int from = int.Parse(Console.ReadLine()); //int from
 
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Enter TO number:");
@@ -284,7 +297,7 @@ class Program
                 Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.Write("Your choice: ");
                 Console.ResetColor();
-                int to = int.Parse(Console.ReadLine());
+                int to = int.Parse(Console.ReadLine()); //int to
 
                 if (from > to)
                 {
@@ -294,9 +307,11 @@ class Program
                     return;
                 }
 
+                int rndNum = 0;
+
                 while (true)
                 {
-                    int rndNum = rng.Next(from, to + 1);
+                    rndNum = rng.Next(from, to + 1);
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.WriteLine("Generated number: " + rndNum);
                     Console.ResetColor();
@@ -307,9 +322,13 @@ class Program
 
                     if (Console.ReadLine().ToLower() != "y") break;
                 }
+
+                string calczaznam = $"RNG (numbers): from: {from} to: {to} genereted: {rndNum}   - Date: {DateTime.Now}"; //add do history numbers
+                calcScore.Add(calczaznam);
             }
 
             Console.WriteLine("Thanks for using RNG " + ver);
+            
         }
 
         // ------------------------- UNIT CONVERTER ------------------------- //
@@ -331,6 +350,8 @@ class Program
 
             Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.WriteLine("How much units do you want to convert?");
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.Write("Your choice: ");
             Console.ResetColor();
             double HOWMUCH = double.Parse(Console.ReadLine());
 
@@ -500,7 +521,7 @@ class Program
                 Console.ReadLine();
             }
         }
-
+//----------------------historie-------------------------//
         if (whattodo == 5)
         {
             Console.Clear();
@@ -512,8 +533,9 @@ class Program
             Console.ResetColor();
             double historyofnig = double.Parse(Console.ReadLine());
 
-            if (historyofnig == 1)
+            if (historyofnig == 1) //gaming history
             {
+                Console.Clear();
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("=== Gaming history ===");
                 Console.ResetColor();
@@ -523,23 +545,38 @@ class Program
                 {
                     Console.WriteLine("Nothing there . . .");
                 }
-                foreach (string zaznam in historieScore)
+                foreach (string zaznam in historieScore) 
                 {
                     
                     Console.WriteLine(zaznam);
                     Console.WriteLine("");
                 }
             }
-            if (historyofnig != 1 && historyofnig != 2)
+            
+            if (historyofnig == 2) //calc history
+            {
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("=== Calculations history ===");
+                Console.ResetColor();
+                Console.WriteLine("");
+                if (calcScore.Count == 0)
+                {
+                    Console.WriteLine("Nothing there . . .");
+                }
+                foreach (string calczaznam in calcScore)
+                {
+                    
+                    Console.WriteLine(calczaznam);
+                    Console.WriteLine("");
+                }
+            }
+
+            if (historyofnig != 1 && historyofnig != 2) //invalid options
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Invalid option! - " + historyofnig + " - try something else!");
                 Console.ResetColor();
-            }
-
-            if (historyofnig == 2)
-            {
-                Console.WriteLine("SOON");
             }
         
         }
@@ -566,14 +603,136 @@ class Program
 //----------------------TIMER a STOPWATCH-----------------//
     if (whattodo == 6)
             {
-                Console.WriteLine("Complete SOON!"); //timer
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("=== Timer ===");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("How many seconds (s)");
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.Write("Your choice: ");
+                Console.ResetColor();
+                int seconds = int.Parse(Console.ReadLine());
+                Console.ForegroundColor = ConsoleColor.Red;
+
+                for (int i = seconds; i > 0; i--)
+                {
+                    Console.WriteLine($"Remaning: {i} s");
+                    Thread.Sleep(1000); 
+                    Console.Clear();
+                }
+
+                Console.WriteLine("Time's up!");
             }
 
-    if (whattodo == 7)
+    if (whattodo == 7) //stopwatch
             {
-                Console.WriteLine("Complete SOON!"); //stopwatch
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("=== stopwatch ===");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Press enter whenever do you want to start stopwatch");
+                Console.ReadLine();
+                Stopwatch stopky1 = new Stopwatch();
+                stopky1.Start();
+                while (true)
+            {
+            
+                Console.Clear();
+
+            
+                Console.WriteLine("Press Enter to stop stopwatch");
+                Console.WriteLine(stopky1.Elapsed.ToString(@"hh\:mm\:ss\.fff"));
+
+            
+                if (Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Enter)
+                    break;
+
+                Thread.Sleep(100); 
             }
 
+            stopky1.Stop();
+            Console.WriteLine("");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Final time: " + stopky1.Elapsed);
+            Console.WriteLine("");
+            Console.ResetColor();
+
+            }
+
+    //----------------odmocnina a mocnina -----------------------//
+    if (whattodo == 8)
+        {
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("=== ^ and √ ===");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("1 → ^");
+                Console.WriteLine("2 → √");
+                Console.WriteLine("What do you want to use ");
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.Write("Your choice (1/2): ");
+                Console.ResetColor();
+                int operationOrNot = int.Parse(Console.ReadLine());
+
+                //if (operationOrNot != 1 || operationOrNot != 2)
+                //{
+                //    Console.WriteLine("NOT VALID NUMBER!");
+                //}
+                double NumberToBeFirst = 0;
+                double NumberToBeSecond = 0;
+                double vysledek = 0;
+
+
+                if (operationOrNot == 1)
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Enter your first number to ^");
+                    Console.ResetColor();
+                    Console.Write("Your choice (1,2,3): ");
+                    NumberToBeFirst = double.Parse(Console.ReadLine());
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Enter your second number");
+                    Console.ResetColor();
+                    Console.Write("Your choice (1,2,3): ");
+                    NumberToBeSecond = double.Parse(Console.ReadLine());
+                    vysledek = Math.Pow(NumberToBeFirst, NumberToBeSecond);
+
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"{NumberToBeFirst} ^ {NumberToBeSecond} = {vysledek}"); //vysledek mocniny
+                    Console.ResetColor();
+
+
+                }
+
+                string calczaznam = $"^: from: {NumberToBeFirst} by: {NumberToBeSecond} is: {vysledek} - Date: {DateTime.Now}"; //add do history 
+                calcScore.Add(calczaznam);
+          
+                double NotANumber = 0;
+                double odemocnina = 0;
+
+                if (operationOrNot == 2)
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Enter your number to √");
+                    Console.ResetColor();
+                    Console.Write("Your choice (1,2,3): ");
+                    NotANumber = double.Parse(Console.ReadLine());
+                    odemocnina = Math.Sqrt(NotANumber);
+
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Squr of " + NotANumber + " is " + odemocnina);
+                    Console.ResetColor();
+
+                }
+
+                calczaznam = $"√: from: {NotANumber} is: {odemocnina} - Date: {DateTime.Now}"; //add do history 
+                calcScore.Add(calczaznam);
+
+        }
+        
+        
+        
+        
         else
         {
             //Console.ForegroundColor = ConsoleColor.Red;
@@ -595,6 +754,3 @@ class Program
   }
 
 }
-
-
-//made by RozbitiOkno - 600 lines
