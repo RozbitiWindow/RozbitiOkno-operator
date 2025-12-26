@@ -1,4 +1,5 @@
-﻿using System;
+//Disclaimer, this part is not made by me.
+using System;
 
 
     /// <summary>
