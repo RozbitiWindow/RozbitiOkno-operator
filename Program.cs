@@ -6,6 +6,8 @@ using System.Net;
 using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
+using System.IO;
+
 
 class Program
 {
@@ -18,6 +20,10 @@ class Program
     static int secretModeUnlocked = 0;
     static int rangeOfLastNumber = 100;
     static int showNumber = 0;
+    static int RollTheDice = 0;
+    static int firstnumberunlocked = 0;
+    static int minigamesunlocked = 0;
+    static int confirmExits = 1;
     static void Main()
     {
         string ver = "1.2.7"; // everything was made by RozbitiOkno 24.11.2025 
@@ -28,8 +34,23 @@ class Program
         while (repete != 10)
         {
             Console.Clear();
-            percentage += 7.49546;
+
+            Console.WriteLine(@"
+  OOOOO    K   K   N   N   OOOOO
+ O     O   K  K    NN  N  O     O
+ O     O   K K     N N N  O     O
+ O     O   KK      N  NN  O     O
+ O     O   K K     N   N  O     O
+ O     O   K  K    N   N  O     O
+  OOOOO    K   K   N   N   OOOOO
+                            ");
+
+            percentage += 8.5;
             Console.WriteLine("[----- " + percentage + "% -----]");
+            if (percentage > 50)
+            {
+                Console.WriteLine("Process ENTER to skip");
+            }
             Thread.Sleep(400);
 
             if (Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Enter)
@@ -52,23 +73,25 @@ class Program
             // MAIN MENU
 
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("1 → Calculations");
-            Console.WriteLine("2 → Random numbers");
-            Console.WriteLine("3 → Unit converter");
-            Console.WriteLine("4 → Play minigames");
-            Console.WriteLine("5 → See history");
-            Console.WriteLine("6 → Timer");
-            Console.WriteLine("7 → StopWatch");
-            Console.WriteLine("8 → ^,√ ");
-            Console.WriteLine("9 → Settings");
-            Console.WriteLine("0 → exit");
+            Console.WriteLine("1  →  Calculations");
+            Console.WriteLine("2  →  Random numbers");
+            Console.WriteLine("3  →  Unit converter");
+            Console.WriteLine("4  →  Play minigames");
+            Console.WriteLine("5  →  See history");
+            Console.WriteLine("6  →  Timer");
+            Console.WriteLine("7  →  StopWatch");
+            Console.WriteLine("8  →  ^,√ ");
+            Console.WriteLine("9  →  Roll the dice");
+            Console.WriteLine("10 →  achivments");
+            Console.WriteLine("11 →  Settings");
+            Console.WriteLine("0  →  exit");
             Console.ResetColor();
             Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.Write("Your choice: ");
             Console.ResetColor();
             double whattodo = double.Parse(Console.ReadLine());
 
-            if (whattodo != 0 && whattodo != 1 && whattodo != 2 && whattodo != 3 && whattodo != 4 && whattodo != 5 && whattodo != 111 && whattodo != 67 && whattodo != 420 && whattodo != 1337 && whattodo != 6 && whattodo != 7 && whattodo != 8 && whattodo != 9)
+            if (whattodo != 0 && whattodo != 1 && whattodo != 2 && whattodo != 3 && whattodo != 4 && whattodo != 5 && whattodo != 111 && whattodo != 67 && whattodo != 420 && whattodo != 1337 && whattodo != 6 && whattodo != 7 && whattodo != 8 && whattodo != 9 && whattodo != 10 && whattodo != 11)
             {
                 Console.WriteLine("ERROR: Not a number or invalid number!");
             }
@@ -85,6 +108,17 @@ class Program
                     Console.WriteLine("Exiting . . .");
                     Console.ResetColor();
                     Console.Clear();
+
+
+                    Console.WriteLine(@"
+  OOOOO    K   K   N   N   OOOOO
+ O     O   K  K    NN  N  O     O
+ O     O   K K     N N N  O     O
+ O     O   KK      N  NN  O     O
+ O     O   K K     N   N  O     O
+ O     O   K  K    N   N  O     O
+  OOOOO    K   K   N   N   OOOOO
+                            ");
                     return;
                 }
                 if (doyouwanttocontinue == "n" || doyouwanttocontinue == "N")
@@ -118,6 +152,7 @@ class Program
             if (whattodo == 1)
             {
                 Console.Clear();
+                firstnumberunlocked = 1;
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("=== Calculator v." + ver + " ===");
                 Console.ResetColor();
@@ -402,6 +437,7 @@ class Program
             else if (whattodo == 4)
             {
                 Console.Clear();
+                minigamesunlocked = 1;
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("==== Minigames v." + ver + " ====");
                 Console.ResetColor();
@@ -434,7 +470,7 @@ class Program
                         {
                             Console.Write("Your choice: ");
                         }
-                        
+
                         if (!int.TryParse(Console.ReadLine(), out int guess))
                         {
                             Console.WriteLine("Not a number!");
@@ -800,7 +836,7 @@ class Program
 
             //--------------SETTINGS-------------------//        
 
-            if (whattodo == 9) //FIX
+            if (whattodo == 11) //FIXed
             {
                 exiting123 = 0;
 
@@ -813,18 +849,46 @@ class Program
 
                     if (savehistory == 1) //ukladat historifing
                     {
-                        Console.WriteLine("\n1 → save history - TRUE");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.Write("\n1 → save history -");
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine(" TRUE");
+                        Console.ForegroundColor = ConsoleColor.Green;
                     }
                     else
                     {
-                        Console.WriteLine("\n1 → save history - FALSE");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.Write("\n1 → save history -");
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine(" FALSE");
+                        Console.ForegroundColor = ConsoleColor.Green;
                     }
 
 
                     Console.WriteLine("2 → Clear history");
                     Console.WriteLine("3 → Change snake speed");
                     Console.WriteLine("4 → Guess the number - range");
-                    Console.WriteLine("0 → Exit"); //exit
+                    Console.WriteLine("5 → Export history to .txt file");
+                    Console.WriteLine("6 → Upload history from .txt file");
+                    if (confirmExits == 1)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.Write("7 → Confirm exits -");
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write(" TRUE ");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("- (program exit not improved!)");
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.Write("7 → Confirm exits -");
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write(" FALSE ");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("- (program exit not improved!)");
+                    }
+                    Console.WriteLine("0 → Exit"); //exit sem snad slepej nebo CO ???
 
                     if (secretModeUnlocked == 1)
                     {
@@ -840,34 +904,46 @@ class Program
 
                     if (trueOrFlase == 0) //exit
                     {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Are you sure, you want exit settings? (y/n)");
-                        Console.ForegroundColor = ConsoleColor.DarkRed;
-                        Console.Write("Your choice: ");
-                        Console.ResetColor();
-                        string AreYouSure = Console.ReadLine();
+                        if (confirmExits == 1)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("Are you sure, you want exit settings? (y/n)");
+                            Console.ForegroundColor = ConsoleColor.DarkRed;
+                            Console.Write("Your choice: ");
+                            Console.ResetColor();
+                            string AreYouSure = Console.ReadLine();
 
-                        if (AreYouSure == "y")
+
+
+                            if (AreYouSure == "y")
+                            {
+                                Console.WriteLine("Saving changes and exiting . . .");
+                                exiting123 = 1;
+                                Thread.Sleep(1000);
+                            }
+
+                            else if (AreYouSure == "n")
+                            {
+                                Console.Clear();
+                                Console.WriteLine("OK, cancled!");
+                            }
+
+                            else
+                            {
+                                Console.Clear();
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("Invalid operation, cancled!");
+                                Thread.Sleep(1000);
+                                Console.ResetColor();
+                            }
+                        }
+                        else
                         {
                             Console.WriteLine("Saving changes and exiting . . .");
                             exiting123 = 1;
                             Thread.Sleep(1000);
                         }
 
-                        else if (AreYouSure == "n")
-                        {
-                            Console.Clear();
-                            Console.WriteLine("OK, cancled!");
-                        }
-
-                        else
-                        {
-                            Console.Clear();
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("Invalid operation, cancled!");
-                            Thread.Sleep(1000);
-                            Console.ResetColor();
-                        }
 
                     }
 
@@ -986,7 +1062,7 @@ class Program
                                 }
                             case "4":
                                 {
-                                    rangeOfLastNumber = 1000;
+                                    rangeOfLastNumber = 10000;
                                     break;
                                 }
 
@@ -1002,27 +1078,231 @@ class Program
                         Console.WriteLine("Number will be shown");
                         Thread.Sleep(1000);
                     }
+
+                    if (trueOrFlase == 5)
+                    {
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("=== Export history ===");
+                        Console.WriteLine("");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("What name should be named your .txt history? (leave blanc for standard name)");
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.Write("Your choice: ");
+                        Console.ResetColor();
+                        string NameForHistory = Console.ReadLine();
+                        if (NameForHistory == "")
+                        {
+                            NameForHistory = "History_from_R.O._app";
+                        }
+
+                        string fileName = NameForHistory + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".txt";
+
+                        using (StreamWriter writer = new StreamWriter(fileName))
+                        {
+                            writer.WriteLine("=== GAMING HISTORY ===");
+                            writer.WriteLine("");
+
+                            if (historieScore.Count == 0)
+                            {
+                                writer.WriteLine("No gaming history.");
+                            }
+
+                            else
+                            {
+                                foreach (string zaznam in historieScore)
+                                    writer.WriteLine(zaznam);
+                            }
+
+                            writer.WriteLine("");
+                            writer.WriteLine("=== CALC HISTORY ===");
+                            writer.WriteLine("");
+
+                            if (calcScore.Count == 0)
+                                writer.WriteLine("No calc history.");
+                            else
+                                foreach (string calczaznam in calcScore)
+                                    writer.WriteLine(calczaznam);
+                        }
+
+
+
+
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("History exported!");
+                        Console.WriteLine("File name: " + fileName);
+                        Console.WriteLine("Exported to same folder as this app (~/home/~/calc/" + fileName + "/)");
+                        Console.WriteLine("Gaming records: " + historieScore.Count);
+                        Console.WriteLine("Calc records: " + calcScore.Count);
+                        Console.ResetColor();
+                        Console.WriteLine("Press enter to continue . . .");
+                        Console.ReadLine();
+
+
+                    }
+
+                    if (trueOrFlase == 6)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Comming soon!");
+                        Thread.Sleep(1000);
+                    }
+
+                    if (trueOrFlase == 7)
+                    {
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Are you sure, you want to turn off exit confirmation? (y/n)");
+                        Console.ResetColor();
+                        Console.Write("Your option: ");
+                        string areyourealysure = Console.ReadLine();
+                        if (areyourealysure == "y")
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("Are you realy sure? (y/n)");
+                            Console.ResetColor();
+                            Console.Write("Your option: ");
+                            string areyourealysureFUCK = Console.ReadLine();
+                            if (areyourealysureFUCK == "y")
+                            {
+                                confirmExits = 0;
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("Allright you got it ");
+                                Thread.Sleep(1500);
+                            }
+                            if (areyourealysureFUCK == "n")
+                            {
+                                confirmExits = 1;
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("Now you will need to confirm exit everywhere!");
+                                Thread.Sleep(1500);
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid option!");
+                                Console.WriteLine("Leaving last option");
+                            }
+                        }
+                        if (areyourealysure == "n")
+                        {
+                            Console.WriteLine("I though so . . .");
+                            confirmExits = 1;
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("Now you will need to confirm exit everywhere!");
+                            Thread.Sleep(1500);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid option!");
+                        }
+
+                    }
+
                 }
 
+
+
+
+
+
+
             }
 
-
-
-
-
-
-
-
-
-            else
+            if (whattodo == 9)
             {
-                //Console.ForegroundColor = ConsoleColor.Red;
-                //Console.WriteLine("Invalid option!");
-                //Console.ResetColor();
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("=== Roll the dice ===");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("\nSelect what number range will you use? (1-6)");
+                Console.ResetColor();
+
+                Console.WriteLine("1 → 1-2");
+                Console.WriteLine("2 → 1-3");
+                Console.WriteLine("3 → 1-4");
+                Console.WriteLine("4 → 1-5");
+                Console.WriteLine("5 → 1-6");
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.Write("Your choice: ");
+                Console.ResetColor();
+
+                int choice = int.Parse(Console.ReadLine());
+
+                Random rnd = new Random();
+                int result = 0;
+
+                switch (choice)
+                {
+                    case 1:
+                        result = rnd.Next(1, 3); // 1–2
+                        break;
+                    case 2:
+                        result = rnd.Next(1, 4); // 1–3
+                        break;
+                    case 3:
+                        result = rnd.Next(1, 5); // 1–4
+                        break;
+                    case 4:
+                        result = rnd.Next(1, 6); // 1–5
+                        break;
+                    case 5:
+                        result = rnd.Next(1, 7); // 1–6
+                        break;
+                    default:
+                        Console.WriteLine("Invalid choice");
+                        return;
+                }
+
+                Console.WriteLine($"You rolled: {result}");
             }
 
 
-            Console.WriteLine("See more on github.com/rozbitiwindow");
+            //---------------achivments------------------//
+            if (whattodo == 10)
+            {
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("=== Adchivments ===");
+                Console.ForegroundColor = ConsoleColor.Green;
+
+                if (firstnumberunlocked == 1)
+                {
+                    Console.WriteLine("\nFirst number - UNLOCKED");
+                    Console.ResetColor();
+                    Console.WriteLine("Calculate first number using calculator!");
+                }
+                else
+                {
+                    Console.WriteLine("\nFirst number - not found :-(");
+                    Console.ResetColor();
+                    Console.WriteLine("Calculate first number using calculator!");
+                }
+                Console.WriteLine("\n");
+
+                if (minigamesunlocked == 1)
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Play time! - UNLOCKED");
+                    Console.ResetColor();
+                    Console.WriteLine("\nPlay minigame for first time");
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Play time! - not found :-(");
+                    Console.ResetColor();
+                    Console.WriteLine("Play minigame for first time");
+                }
+                Console.WriteLine("\n");
+
+
+
+
+                Console.WriteLine("--------------------------------------------");
+            }
+
+
+            Console.WriteLine("See more on https://github.com/RozbitiWindow");
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("Press ENTER to exit...");
             Console.ReadLine();
