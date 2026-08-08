@@ -9,14 +9,12 @@ Console.WriteLine("Broken calc by RozbitiOkno");
 
 while (true)
 {
-    Console.ForegroundColor = ConsoleColor.Green;
-    Console.Write("Math problem: ");
-    Console.ResetColor();
+    outputWriter.Write("Math problem: ", ConsoleColor.Green);
     string input = Console.ReadLine() ?? "";
 
     if (input == "exit")
     {
-        Console.WriteLine("Exiting ...");
+        outputWriter.WriteWarning("Exiting ...");
         break;
     }
     if (input == "S" || input == "s") { settings.Open(); }
@@ -25,17 +23,13 @@ while (true)
     try
     {
         var result = new DataTable().Compute(input, null);
-        Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine($"= {result}");
-        Console.ResetColor();
+        outputWriter.WriteLine($"= {result}", ConsoleColor.Red);
     }
     catch
     {
         if (settings.input != 0)
         {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("ERROR: Invalid syntax!");
-            Console.ResetColor();
+            outputWriter.WriteError("ERROR: Invalid syntax!");
         }
 
 

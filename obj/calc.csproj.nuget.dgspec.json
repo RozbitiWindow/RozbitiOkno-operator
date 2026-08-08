@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/okno/calc/calc.csproj": {}
+    "/home/okno/Calc/calc.csproj": {}
   },
   "projects": {
-    "/home/okno/calc/calc.csproj": {
+    "/home/okno/Calc/calc.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/okno/calc/calc.csproj",
+        "projectUniqueName": "/home/okno/Calc/calc.csproj",
         "projectName": "calc",
-        "projectPath": "/home/okno/calc/calc.csproj",
+        "projectPath": "/home/okno/Calc/calc.csproj",
         "packagesPath": "/home/okno/.nuget/packages/",
-        "outputPath": "/home/okno/calc/obj/",
+        "outputPath": "/home/okno/Calc/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/okno/.nuget/NuGet/NuGet.Config"
@@ -57,7 +57,7 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[10.0.3, 10.0.3]"
+              "version": "[10.0.10, 10.0.10]"
             }
           ],
           "frameworkReferences": {
@@ -65,7 +65,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/10.0.103/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/10.0.110/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",

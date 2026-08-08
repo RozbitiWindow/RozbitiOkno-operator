@@ -1,1 +1,1 @@
-closeProgram=False
+closeProgram=True

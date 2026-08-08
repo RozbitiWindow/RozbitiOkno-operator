@@ -26,3 +26,4 @@
 /home/okno/calc/obj/Debug/net10.0/calc.pdb
 /home/okno/calc/obj/Debug/net10.0/calc.genruntimeconfig.cache
 /home/okno/calc/obj/Debug/net10.0/ref/calc.dll
+/home/okno/Calc/obj/Debug/net10.0/calc.sourcelink.json
